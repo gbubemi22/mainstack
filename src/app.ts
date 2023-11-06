@@ -49,6 +49,7 @@ const applyRateLimiter = async (
 
 app.use(applyRateLimiter);
 app.use(helmet());
+app.set('trust proxy', true);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to MY App" });

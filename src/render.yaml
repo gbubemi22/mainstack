@@ -1,5 +1,5 @@
 name: mainstack
 type: web
 buildCommand: tsc --project tsconfig.json
-startCommand: npm run build && node dist/app.js 
+startCommand: https://mainstack-6rwq.onrender.com 
 directory: src
