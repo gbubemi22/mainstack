@@ -30,6 +30,11 @@ const UserRepository = {
 
     return user;
   },
+  getUserBynumber: async (phone_number: string) => {
+    const user = await User.findOne({ phone_number });
+
+    return user;
+  },
 };
 
 export default UserRepository;
