@@ -12,7 +12,6 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
 import helmet from "helmet";
-const rateLimitPromise = import("express-rate-limit");
 import mongoSanitize from "express-mongo-sanitize";
 
 //import DB
@@ -30,24 +29,10 @@ app.use(cookieParser(configs.JWT_COOKIE));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(mongoSanitize());
 
-const applyRateLimiter = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { default: rateLimit } = await rateLimitPromise;
 
-  const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 50, // limit each IP to 100 requests per windowMs
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  });
+ 
 
-  limiter(req, res, next);
-};
 
-app.use(applyRateLimiter);
 app.use(helmet());
 app.set('trust proxy', true);
 
